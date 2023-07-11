@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
+// App.js
+
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FavouritesProvider } from './utils/store';
+import HomeScreen from './screens/HomeScreen';
+import SearchScreen from './screens/SearchScreen';
+import CategoryScreen from './screens/CategoryScreen';
+import FavouritesScreen from './screens/FavouritesScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const Tab = createBottomTabNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+    return (
+        <FavouritesProvider>
+            <NavigationContainer>
+                <Tab.Navigator>
+                    <Tab.Screen name="Home" component={HomeScreen} />
+                    <Tab.Screen name="Search" component={SearchScreen} />
+                    <Tab.Screen name="Categories" component={CategoryScreen} />
+                    <Tab.Screen name="Favourites" component={FavouritesScreen} />
+                </Tab.Navigator>
+            </NavigationContainer>
+        </FavouritesProvider>
+    );
+};
+
+export default App;
